@@ -8,37 +8,22 @@
     </h2>
 </div>
 
-<div class="bookSection">
-    <div class="books">
-        <a href="books/1">
+<div class=bookSection>
+        
+        <% let x = 0 %>
+        <% books.forEach (books => { %>
+            <% x++ %>
             <br />
-            <%= books[0].bookTitle%>
-            <br />
-            <br />
-        </a>
-    </div>
-
-    <br />
-
-    <div class="books">
-        <a href="books/2">
-            <br />
-            <%= books[1].bookTitle%>
+            <div class=books>
             <br />
             <br />
-        </a>
-    </div>
-
-    <br />
-
-    <div class="books">
-        <a href="books/3">
-            <br />
-            <%= books[2].bookTitle%>
+            <a href="books/<%=x%>" >  <%= books.bookTitle %> 
             <br />
             <br />
-        </a>
-    </div>
+            <br />
+            </div>
+            <br />
+            <%});%>
 </div>
 
 </div>

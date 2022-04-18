@@ -31,30 +31,5 @@ app.get("/", controller.sendIndex);
 app.get("/home", controller.sendIndex);
 app.get("/books/:bookNumber", controller.sendBook);
 
-
-`
-app.get('/all-blogs', (req, res) => {
-    Books.find()
-        .then((result) => {
-            res.send(result);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-})
-`
-
-app.get('/single-blog', (req, res) => {
-    Books.find({
-                bookTitle: "Compilers: Principles, Tools, and Techniques"
-            })
-        .then((result) => {
-            res.send(result)
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-})
-
 app.listen(3000);
 
