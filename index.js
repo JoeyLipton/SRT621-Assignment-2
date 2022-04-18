@@ -1,6 +1,9 @@
 const express = require('express'),
     app = express(),
+    router = express.Router(),
     controller = require('./controllers/homeController')
+
+const bodyParser = require('body-parser');
 
 const layouts = require("express-ejs-layouts");
 
@@ -18,7 +21,7 @@ mongoose.connect(
 
 app.set("view engine", "ejs");
 app.use(express.static("public"))
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(layouts);
 
@@ -27,9 +30,13 @@ app.get("/home", controller.getAllBooks, (req, res, next) => {
     )
 })
 
-app.get("/", controller.sendIndex);
+app.get("/", controller.sendHome);
 app.get("/home", controller.sendIndex);
 app.get("/books/:bookNumber", controller.sendBook);
+app.get("/AddNewBook", controller.addBookPage);
+app.get("/DeleteABook", controller.delBookPage);
+app.post("/books/newBookCreate", controller.bookCreate, controller.redir);
+app.post("/books/newBookDelete", controller.bookDelete, controller.redir);
 
 app.listen(3000);
 

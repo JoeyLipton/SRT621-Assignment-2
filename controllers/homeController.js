@@ -3,15 +3,40 @@ const path = require("path");
 const mongoose = require('mongoose'),
     Books = require("../models/books")
 
+
 exports.sendHome = (req, res) => {
-    res.redirect("index");
+    res.redirect("/home");
 }
 
 exports.sendIndex = (req, res) => {
     res.render("index");
 }
 
+exports.addBookPage = (req, res) => {
+    res.render("addBook")
+}
 
+exports.bookCreate = (req, res) => {
+    const book = new Books({
+        bookTitle: req.body.titleForm,
+        authorName: req.body.authorForm,
+        amazonLink: req.body.amazonLinkForm
+    });
+    book.save();
+    res.redirect("/home")
+}
+
+exports.delBookPage = (req, res) => {
+    res.render("delBook")
+}
+
+exports.bookDelete = (req, res) => {
+    res.render("delBook")
+}
+
+exports.redir = (req, res) => {
+    res.redirect("/home")
+}
 
 exports.getAllBooks = (req, res, next) => {
     Books.find({}, (err, books) => {

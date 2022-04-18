@@ -1,0 +1,34 @@
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+<div class="container">
+
+<div class="top">
+    <h2 class="header">
+        Add a New Book
+    </h2>
+</div>
+
+<form action="../books/newBookCreate" method="POST">
+
+        <br /><label id="titleForm">Book Name: </label><br />
+        <input type="text" name="titleForm" id="titleForm"><br />
+        <br /><label id="authorForm">Book Author: </label><br />
+        <input type="text" name="authorForm" id="authorForm"><br />
+        <br /><label id="amazonLinkForm">Amazon Link: </label><br />
+        <input type="text" name="amazonLinkForm" id="amazonLinkForm"><br /><br />
+        <button>Add Books to Database</button>
+    
+</form>
+
+
+<div class="navigationPane">
+    <h4>Navigation Pane&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;</h4>
+    <a href="/home"> List of Books </a>
+    &thinsp;|&thinsp;
+    <a href="/AddNewBook"> Add A Book </a>
+    &thinsp;|&thinsp;
+    <a href="/DeleteABook"> Delete A Books </a>
+    &thinsp;&thinsp;&thinsp;&thinsp;&thinsp;<br /><br />
+</div>
+
+</div>
