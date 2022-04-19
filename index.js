@@ -3,6 +3,8 @@ const express = require('express'),
     router = express.Router(),
     controller = require('./controllers/homeController')
 
+const port = process.env.PORT || 3000
+
 const bodyParser = require('body-parser');
 
 const layouts = require("express-ejs-layouts");
@@ -41,5 +43,5 @@ app.get("/DeleteABook", controller.getAllBooks, (req, res, next) => {
 app.post("/books/newBookCreate", controller.bookCreate);
 app.get("/bookDelete/:bookData", controller.bookDelete);
 
-app.listen(3000);
+app.listen(port);
 
