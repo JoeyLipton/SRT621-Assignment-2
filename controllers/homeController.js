@@ -3,6 +3,8 @@ const path = require("path");
 const mongoose = require('mongoose'),
     Books = require("../models/books")
 
+const controller = require('./homeController');
+
 exports.getAllBooks = (req, res, next) => {
     Books.find({}, (err, books) => {
         if (err) next(err);
@@ -34,7 +36,7 @@ exports.bookCreate = (req, res) => {
         amazonLink: req.body.amazonLinkForm
     });
     book.save();
-    res.redirect("/home")
+    res.redirect("/home");
 }
 
 
@@ -54,60 +56,29 @@ exports.bookDelete = (req, res, next) => {
 }
 
 
-exports.sendBook = (req, res) => {
+exports.sendBook = (req, res, next) => {
     const bookNumber = req.params.bookNumber;
     switch (bookNumber) {
-        case "1":
-            const bookTitle1 = Books.find({
-                bookTitle: "Compilers: Principles, Tools, and Techniques"
-            })
-            bookTitle1.exec((err, data) => {
+        case "1":case "2":case "3":case "4":
+            //const bookTitle = Books.find({
+            //    bookTitle: "Data Structures and Algorithms in Java "
+            //})
+            Books.find({}, function(err, workplz) {
                 if (!err) {
+                    const bookTitle = workplz[bookNumber - 1]
+                    console.log(bookTitle);
                     res.render(bookNumber, {
-                        book: data
+                        book: bookTitle
                     });
-                }
-                else {
-                    return handleError(err);
-                }
-            })
+                } else {
+                    console.log("This is not working 1")
+                };
+            });
+            
             break;
-        case "2":
-            const bookTitle2 = Books.find({
-                bookTitle: "Data Structures and Algorithms in Java "
-            })
-            bookTitle2.exec((err, data) => {
-                if (!err) {
-                    res.render(bookNumber, {
-                        book: data
-                    });
-                }
-                else {
-                    return handleError(err);
-                }
-            })
+        default:
+            res.redirect('/home');
             break;
-        case "3":
-            const bookTitle3 = Books.find({
-                bookTitle: "The Cat in the Hat"
-            })
-            bookTitle3.exec((err, data) => {
-                if (!err) {
-                    res.render(bookNumber, {
-                        book: data
-                    });
-                }
-                else {
-                    return handleError(err);
-                }
-            })
-            break;
-        default: 
-            Books.find({bookTitle: "Compilers: Principles, Tools, and Techniques"})
-                .then((result) => {
-                    res.render(bookNumber);
-                })
-                break;
     }
     // res.render(bookNumber);
 }

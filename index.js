@@ -25,13 +25,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(layouts);
 
+app.get("/", controller.sendHome);
 app.get("/home", controller.getAllBooks, (req, res, next) => {
     res.render("index", { books: req.data }
     )
-})
+});
 
-app.get("/", controller.sendHome);
-app.get("/home", controller.sendIndex);
 app.get("/books/:bookNumber", controller.sendBook);
 app.get("/AddNewBook", controller.addBookPage);
 app.get("/DeleteABook", controller.getAllBooks, (req, res, next) => {
