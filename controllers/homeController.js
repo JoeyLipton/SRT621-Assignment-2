@@ -37,6 +37,7 @@ exports.bookCreate = (req, res) => {
     });
     book.save();
     res.redirect("/home");
+    res.redirect("/home");
 }
 
 

@@ -17,9 +17,9 @@
             <div class=books>
             <br />
             <br />
-            <button id="<%= books._id %>" type="submit" onlick="return confirm('Are you sure you would like to delete this book from the database?')">
+            <button id="<%= books._id %>" type="submit" onclick="if(!confirm('Are you sure you want to delete this book?')){return false;}">
             ❌  <a href="<%= `../bookDelete/${books.bookTitle}` %>" method="GET"  > <%= books.bookTitle %> </a>
-            </button>
+            </button> 
             <br />
             <br />
             <br />
