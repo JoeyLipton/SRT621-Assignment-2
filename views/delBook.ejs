@@ -4,12 +4,29 @@
 
 <div class="top">
     <h2 class="header">
-        Add a New Book
+        Delete a Book
     </h2>
 </div>
 
-<form action="../books/newBookDelete" method="POST">
-    
+<form action="<%= `../bookDelete/${books._id}` %>" method="GET">
+    <div class=bookSection>
+        <% let x = 0 %>
+        <% books.forEach (books => { %>
+            <% x++ %>
+            <br />
+            <div class=books>
+            <br />
+            <br />
+            <button id="<%= books._id %>" type="submit" onlick="return confirm('Are you sure you would like to delete this book from the database?')">
+            ❌  <a href="<%= `../bookDelete/${books.bookTitle}` %>" method="GET"  > <%= books.bookTitle %> </a>
+            </button>
+            <br />
+            <br />
+            <br />
+            </div>
+            <br />
+            <%});%>
+    </div>
 </form>
 
 

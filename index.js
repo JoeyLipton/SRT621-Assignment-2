@@ -34,9 +34,13 @@ app.get("/", controller.sendHome);
 app.get("/home", controller.sendIndex);
 app.get("/books/:bookNumber", controller.sendBook);
 app.get("/AddNewBook", controller.addBookPage);
-app.get("/DeleteABook", controller.delBookPage);
-app.post("/books/newBookCreate", controller.bookCreate, controller.redir);
-app.post("/books/newBookDelete", controller.bookDelete, controller.redir);
+app.get("/DeleteABook", controller.getAllBooks, (req, res, next) => {
+    res.render("delBook", {
+        books: req.data
+    });
+});
+app.post("/books/newBookCreate", controller.bookCreate);
+app.get("/bookDelete/:bookData", controller.bookDelete);
 
 app.listen(3000);
 

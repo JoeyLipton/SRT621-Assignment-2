@@ -3,6 +3,13 @@ const path = require("path");
 const mongoose = require('mongoose'),
     Books = require("../models/books")
 
+exports.getAllBooks = (req, res, next) => {
+    Books.find({}, (err, books) => {
+        if (err) next(err);
+        req.data = books;
+        next();
+    });
+};
 
 exports.sendHome = (req, res) => {
     res.redirect("/home");
@@ -16,6 +23,10 @@ exports.addBookPage = (req, res) => {
     res.render("addBook")
 }
 
+exports.delBookPage = (req, res) => {
+    res.render("delBook")
+}
+
 exports.bookCreate = (req, res) => {
     const book = new Books({
         bookTitle: req.body.titleForm,
@@ -26,25 +37,22 @@ exports.bookCreate = (req, res) => {
     res.redirect("/home")
 }
 
-exports.delBookPage = (req, res) => {
-    res.render("delBook")
-}
 
-exports.bookDelete = (req, res) => {
-    res.render("delBook")
-}
-
-exports.redir = (req, res) => {
-    res.redirect("/home")
-}
-
-exports.getAllBooks = (req, res, next) => {
-    Books.find({}, (err, books) => {
-        if (err) next(err);
-        req.data = books;
-        next();
+exports.bookDelete = (req, res, next) => {
+    const bookData = req.params.bookData;
+    console.log(bookData);
+    Books.findOneAndDelete({
+        bookTitle: bookData,
+    }, function (err, docs) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Deleted Book: ", docs);
+        }
     });
-};
+    res.redirect("/home");
+}
+
 
 exports.sendBook = (req, res) => {
     const bookNumber = req.params.bookNumber;
